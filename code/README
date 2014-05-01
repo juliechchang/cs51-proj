@@ -1,0 +1,13 @@
+Dennis Lu
+Julie Chang
+
+README
+
+Instructions for compiling and running our code:
+
+1. change directory into the code folder
+2. in the command line, run: corebuild Main.native
+	there should be no errors
+3. in the command line, run: ./Main.native
+	this should create a file called "results.txt" in the same folder
+4. open "results.txt" to look at our decision trees and their accuracies

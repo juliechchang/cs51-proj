@@ -1,0 +1,156 @@
+Dennis Lu, Julie Chang - CS51 Final Project
+
+Part 1: Will you play tennis today?
+
+ID3 Tree:
+Branches (outlook, [(sunny, Branches (humidity, [(normal, Leaf true), (high, Leaf false)])), (overcast, Leaf true), (rain, Branches (wind, [(weak, Leaf true), (strong, Leaf false)]))])
+
+Pruned Rules:
+{conditions: [(outlook, rain), (wind, strong)]; result: false}
+{conditions: [(outlook, rain), (wind, weak)]; result: true}
+{conditions: [(outlook, overcast)]; result: true}
+{conditions: [(outlook, sunny), (humidity, high)]; result: false}
+{conditions: [(outlook, sunny), (humidity, normal)]; result: true}
+
+Part 2: Car Evaluation
+
+ID3 Tree:
+Branches (safety, [(low, Leaf false), (med, Branches (persons, [(2, Leaf false), (4, Branches (buying, [(vhigh, Branches (lug_boot, [(small, Leaf false), (med, Leaf false), (big, Branches (doors, [(2, Leaf true), (3, Leaf true), (4, Leaf false), (5more, Leaf true)]))])), (high, Branches (doors, [(2, Branches (lug_boot, [(small, Leaf false), (med, Leaf false), (big, Leaf true)])), (3, Leaf false), (4, Leaf true), (5more, Leaf false)])), (med, Branches (maint, [(vhigh, Leaf true), (high, Branches (lug_boot, [(small, Leaf false), (med, Leaf true), (big, Leaf true)])), (med, Leaf true), (low, Leaf true)])), (low, Branches (doors, [(2, Leaf true), (3, Leaf false), (4, Leaf true), (5more, Leaf true)]))])), (more, Branches (lug_boot, [(small, Branches (buying, [(vhigh, Leaf false), (high, Leaf false), (med, Leaf true), (low, Branches (maint, [(vhigh, Leaf false), (high, Leaf true), (med, Leaf true), (low, Leaf true)]))])), (med, Branches (maint, [(vhigh, Leaf false), (high, Leaf true), (med, Leaf true), (low, Leaf true)])), (big, Branches (doors, [(2, Leaf true), (3, Branches (buying, [(vhigh, Leaf false), (high, Leaf false), (med, Leaf true), (low, Leaf true)])), (4, Leaf true), (5more, Leaf true)]))]))])), (high, Branches (persons, [(2, Leaf false), (4, Branches (maint, [(vhigh, Branches (buying, [(vhigh, Leaf false), (high, Leaf false), (med, Leaf true), (low, Leaf true)])), (high, Branches (buying, [(vhigh, Leaf false), (high, Leaf true), (med, Leaf true), (low, Leaf true)])), (med, Leaf true), (low, Leaf true)])), (more, Branches (buying, [(vhigh, Branches (maint, [(vhigh, Leaf false), (high, Leaf false), (med, Leaf true), (low, Branches (lug_boot, [(small, Leaf false), (med, Leaf true), (big, Leaf true)]))])), (high, Branches (maint, [(vhigh, Leaf false), (high, Leaf true), (med, Leaf true), (low, Leaf true)])), (med, Leaf true), (low, Leaf true)]))]))])
+
+Pre-Pruned Rules (for comparison):
+{conditions: [(safety, low)]; result: false}
+{conditions: [(safety, med), (persons, 2)]; result: false}
+{conditions: [(safety, med), (persons, 4), (buying, vhigh), (lug_boot, small)]; result: false}
+{conditions: [(safety, med), (persons, 4), (buying, vhigh), (lug_boot, med)]; result: false}
+{conditions: [(safety, med), (persons, 4), (buying, vhigh), (lug_boot, big), (doors, 2)]; result: true}
+{conditions: [(safety, med), (persons, 4), (buying, vhigh), (lug_boot, big), (doors, 3)]; result: true}
+{conditions: [(safety, med), (persons, 4), (buying, vhigh), (lug_boot, big), (doors, 4)]; result: false}
+{conditions: [(safety, med), (persons, 4), (buying, vhigh), (lug_boot, big), (doors, 5more)]; result: true}
+{conditions: [(safety, med), (persons, 4), (buying, high), (doors, 2), (lug_boot, small)]; result: false}
+{conditions: [(safety, med), (persons, 4), (buying, high), (doors, 2), (lug_boot, med)]; result: false}
+{conditions: [(safety, med), (persons, 4), (buying, high), (doors, 2), (lug_boot, big)]; result: true}
+{conditions: [(safety, med), (persons, 4), (buying, high), (doors, 3)]; result: false}
+{conditions: [(safety, med), (persons, 4), (buying, high), (doors, 4)]; result: true}
+{conditions: [(safety, med), (persons, 4), (buying, high), (doors, 5more)]; result: false}
+{conditions: [(safety, med), (persons, 4), (buying, med), (maint, vhigh)]; result: true}
+{conditions: [(safety, med), (persons, 4), (buying, med), (maint, high), (lug_boot, small)]; result: false}
+{conditions: [(safety, med), (persons, 4), (buying, med), (maint, high), (lug_boot, med)]; result: true}
+{conditions: [(safety, med), (persons, 4), (buying, med), (maint, high), (lug_boot, big)]; result: true}
+{conditions: [(safety, med), (persons, 4), (buying, med), (maint, med)]; result: true}
+{conditions: [(safety, med), (persons, 4), (buying, med), (maint, low)]; result: true}
+{conditions: [(safety, med), (persons, 4), (buying, low), (doors, 2)]; result: true}
+{conditions: [(safety, med), (persons, 4), (buying, low), (doors, 3)]; result: false}
+{conditions: [(safety, med), (persons, 4), (buying, low), (doors, 4)]; result: true}
+{conditions: [(safety, med), (persons, 4), (buying, low), (doors, 5more)]; result: true}
+{conditions: [(safety, med), (persons, more), (lug_boot, small), (buying, vhigh)]; result: false}
+{conditions: [(safety, med), (persons, more), (lug_boot, small), (buying, high)]; result: false}
+{conditions: [(safety, med), (persons, more), (lug_boot, small), (buying, med)]; result: true}
+{conditions: [(safety, med), (persons, more), (lug_boot, small), (buying, low), (maint, vhigh)]; result: false}
+{conditions: [(safety, med), (persons, more), (lug_boot, small), (buying, low), (maint, high)]; result: true}
+{conditions: [(safety, med), (persons, more), (lug_boot, small), (buying, low), (maint, med)]; result: true}
+{conditions: [(safety, med), (persons, more), (lug_boot, small), (buying, low), (maint, low)]; result: true}
+{conditions: [(safety, med), (persons, more), (lug_boot, med), (maint, vhigh)]; result: false}
+{conditions: [(safety, med), (persons, more), (lug_boot, med), (maint, high)]; result: true}
+{conditions: [(safety, med), (persons, more), (lug_boot, med), (maint, med)]; result: true}
+{conditions: [(safety, med), (persons, more), (lug_boot, med), (maint, low)]; result: true}
+{conditions: [(safety, med), (persons, more), (lug_boot, big), (doors, 2)]; result: true}
+{conditions: [(safety, med), (persons, more), (lug_boot, big), (doors, 3), (buying, vhigh)]; result: false}
+{conditions: [(safety, med), (persons, more), (lug_boot, big), (doors, 3), (buying, high)]; result: false}
+{conditions: [(safety, med), (persons, more), (lug_boot, big), (doors, 3), (buying, med)]; result: true}
+{conditions: [(safety, med), (persons, more), (lug_boot, big), (doors, 3), (buying, low)]; result: true}
+{conditions: [(safety, med), (persons, more), (lug_boot, big), (doors, 4)]; result: true}
+{conditions: [(safety, med), (persons, more), (lug_boot, big), (doors, 5more)]; result: true}
+{conditions: [(safety, high), (persons, 2)]; result: false}
+{conditions: [(safety, high), (persons, 4), (maint, vhigh), (buying, vhigh)]; result: false}
+{conditions: [(safety, high), (persons, 4), (maint, vhigh), (buying, high)]; result: false}
+{conditions: [(safety, high), (persons, 4), (maint, vhigh), (buying, med)]; result: true}
+{conditions: [(safety, high), (persons, 4), (maint, vhigh), (buying, low)]; result: true}
+{conditions: [(safety, high), (persons, 4), (maint, high), (buying, vhigh)]; result: false}
+{conditions: [(safety, high), (persons, 4), (maint, high), (buying, high)]; result: true}
+{conditions: [(safety, high), (persons, 4), (maint, high), (buying, med)]; result: true}
+{conditions: [(safety, high), (persons, 4), (maint, high), (buying, low)]; result: true}
+{conditions: [(safety, high), (persons, 4), (maint, med)]; result: true}
+{conditions: [(safety, high), (persons, 4), (maint, low)]; result: true}
+{conditions: [(safety, high), (persons, more), (buying, vhigh), (maint, vhigh)]; result: false}
+{conditions: [(safety, high), (persons, more), (buying, vhigh), (maint, high)]; result: false}
+{conditions: [(safety, high), (persons, more), (buying, vhigh), (maint, med)]; result: true}
+{conditions: [(safety, high), (persons, more), (buying, vhigh), (maint, low), (lug_boot, small)]; result: false}
+{conditions: [(safety, high), (persons, more), (buying, vhigh), (maint, low), (lug_boot, med)]; result: true}
+{conditions: [(safety, high), (persons, more), (buying, vhigh), (maint, low), (lug_boot, big)]; result: true}
+{conditions: [(safety, high), (persons, more), (buying, high), (maint, vhigh)]; result: false}
+{conditions: [(safety, high), (persons, more), (buying, high), (maint, high)]; result: true}
+{conditions: [(safety, high), (persons, more), (buying, high), (maint, med)]; result: true}
+{conditions: [(safety, high), (persons, more), (buying, high), (maint, low)]; result: true}
+{conditions: [(safety, high), (persons, more), (buying, med)]; result: true}
+{conditions: [(safety, high), (persons, more), (buying, low)]; result: true}
+
+Pruned Rules:
+{conditions: [(safety, high), (persons, more), (buying, low)]; result: true}
+{conditions: [(safety, high), (persons, more), (buying, med)]; result: true}
+{conditions: [(safety, high), (persons, more), (maint, med)]; result: true}
+{conditions: [(persons, more), (buying, high), (maint, high)]; result: true}
+{conditions: [(buying, high), (maint, vhigh)]; result: false}
+{conditions: [(safety, high), (persons, more), (maint, low), (lug_boot, big)]; result: true}
+{conditions: [(safety, high), (persons, more), (maint, low), (lug_boot, med)]; result: true}
+{conditions: [(persons, more), (buying, vhigh), (lug_boot, small)]; result: false}
+{conditions: [(safety, high), (persons, more), (maint, med)]; result: true}
+{conditions: [(buying, vhigh), (maint, high)]; result: false}
+{conditions: [(buying, vhigh), (maint, vhigh)]; result: false}
+{conditions: [(safety, high), (persons, 4), (maint, low)]; result: true}
+{conditions: [(safety, high), (persons, 4), (maint, med)]; result: true}
+{conditions: [(safety, high), (persons, 4), (buying, low)]; result: true}
+{conditions: [(safety, high), (persons, 4), (buying, med)]; result: true}
+{conditions: [(safety, high), (persons, 4), (maint, high), (buying, high)]; result: true}
+{conditions: [(maint, high), (buying, vhigh)]; result: false}
+{conditions: [(safety, high), (persons, 4), (buying, low)]; result: true}
+{conditions: [(safety, high), (persons, 4), (buying, med)]; result: true}
+{conditions: [(maint, vhigh), (buying, high)]; result: false}
+{conditions: [(maint, vhigh), (buying, vhigh)]; result: false}
+{conditions: [(persons, 2)]; result: false}
+{conditions: [(safety, med), (persons, more), (lug_boot, big), (doors, 5more)]; result: true}
+{conditions: [(safety, med), (persons, more), (lug_boot, big), (doors, 4)]; result: true}
+{conditions: [(safety, med), (persons, more), (lug_boot, big), (buying, low)]; result: true}
+{conditions: [(safety, med), (persons, more), (buying, med)]; result: true}
+{conditions: [(safety, med), (doors, 3), (buying, high)]; result: false}
+{conditions: [(persons, more), (lug_boot, big), (doors, 3), (buying, vhigh)]; result: false}
+{conditions: [(safety, med), (persons, more), (lug_boot, big), (doors, 2)]; result: true}
+{conditions: [(safety, med), (persons, more), (lug_boot, med), (maint, med)]; result: true}
+{conditions: [(safety, med), (persons, more), (lug_boot, med), (maint, high)]; result: true}
+{conditions: [(safety, med), (persons, more), (lug_boot, med), (maint, vhigh)]; result: false}
+{conditions: [(safety, med), (persons, more), (buying, low), (maint, low)]; result: true}
+{conditions: [(safety, med), (persons, more), (buying, low), (maint, med)]; result: true}
+{conditions: [(safety, med), (persons, more), (buying, low), (maint, high)]; result: true}
+{conditions: [(safety, med), (lug_boot, small), (maint, vhigh)]; result: false}
+{conditions: [(safety, med), (persons, more), (buying, med)]; result: true}
+{conditions: [(safety, med), (lug_boot, small), (buying, high)]; result: false}
+{conditions: [(safety, med), (lug_boot, small), (buying, vhigh)]; result: false}
+{conditions: [(safety, med), (persons, 4), (buying, low), (doors, 5more)]; result: true}
+{conditions: [(safety, med), (persons, 4), (buying, low), (doors, 4)]; result: true}
+{conditions: [(safety, med), (persons, 4), (buying, low), (doors, 3)]; result: false}
+{conditions: [(safety, med), (persons, 4), (buying, low), (doors, 2)]; result: true}
+{conditions: [(safety, med), (persons, 4), (buying, med), (maint, low)]; result: true}
+{conditions: [(safety, med), (persons, 4), (buying, med), (maint, med)]; result: true}
+{conditions: [(safety, med), (persons, 4), (buying, med), (lug_boot, big)]; result: true}
+{conditions: [(safety, med), (persons, 4), (buying, med), (lug_boot, med)]; result: true}
+{conditions: [(safety, med), (buying, med), (maint, high), (lug_boot, small)]; result: false}
+{conditions: [(safety, med), (persons, 4), (buying, med), (maint, vhigh)]; result: true}
+{conditions: [(safety, med), (persons, 4), (buying, high), (doors, 5more)]; result: false}
+{conditions: [(safety, med), (persons, 4), (buying, high), (doors, 4)]; result: true}
+{conditions: [(safety, med), (buying, high), (doors, 3)]; result: false}
+{conditions: [(safety, med), (persons, 4), (doors, 2), (lug_boot, big)]; result: true}
+{conditions: [(buying, high), (doors, 2), (lug_boot, med)]; result: false}
+{conditions: [(safety, med), (buying, high), (lug_boot, small)]; result: false}
+{conditions: [(safety, med), (buying, vhigh), (lug_boot, big), (doors, 5more)]; result: true}
+{conditions: [(persons, 4), (buying, vhigh), (doors, 4)]; result: false}
+{conditions: [(safety, med), (persons, 4), (lug_boot, big), (doors, 3)]; result: true}
+{conditions: [(safety, med), (persons, 4), (lug_boot, big), (doors, 2)]; result: true}
+{conditions: [(persons, 4), (buying, vhigh), (lug_boot, med)]; result: false}
+{conditions: [(safety, med), (buying, vhigh), (lug_boot, small)]; result: false}
+{conditions: [(persons, 2)]; result: false}
+{conditions: [(safety, low)]; result: false}
+{conditions: [(safety, high), (persons, more)]; result: true}
+{conditions: [(safety, med), (persons, more)]; result: true}
+
+ID3 accuracy: 92.0994879298%
+Pruning accuracy: 93.489392831%
+
